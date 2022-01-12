@@ -1,5 +1,7 @@
 # TestMavenRepository
 
+[注意] 個々のブランチをmasterや他のブランチにマージしないでください 
+
 ## Use library
 ```
 <project ...>
