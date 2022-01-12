@@ -106,18 +106,6 @@ $ mvn -B -s .m2/settings.xml deploy
 
 ### MolecularFramework (0.1-b37-SNAPSHOT)
 ```
-<repositories>
-  ...
-  <repository>
-    <id>github</id>
-    <name>my github repository</name>
-    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
-  </repository>
-  ...
-</repositories>
-```
-
-```
 <dependencies>
   ...
   <dependency>
@@ -130,18 +118,6 @@ $ mvn -B -s .m2/settings.xml deploy
 ```
 
 ### GlycanBuilder2 (1.15.0)
-```
-<repositories>
-  ...
-  <repository>
-    <id>github</id>
-    <name>my github repository</name>
-    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
-  </repository>
-  ...
-</repositories>
-```
-
 ```
 <dependencies>
   ...
