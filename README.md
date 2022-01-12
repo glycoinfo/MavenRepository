@@ -36,8 +36,8 @@
   ...
   <dependency>
     <groupId>org.eurocarbdb</groupId>
-	  <artifactId>MolecularFramework</artifactId>
-	  <version>0.1-b37-SNAPSHOT</version>
+　  　　　<artifactId>MolecularFramework</artifactId>
+    <version>0.1-b37-SNAPSHOT</version>
   </dependency>
   ...
 </dependencies>
@@ -60,9 +60,9 @@
 <dependencies>
   ...
   <dependency>
-	  <groupId>org.eurocarbdb.glycanbuilder</groupId>
-	  <artifactId>glycanbuilder2</artifactId>
-	  <version>1.15.0</version>
+  　　　　<groupId>org.eurocarbdb.glycanbuilder</groupId>
+    <artifactId>glycanbuilder2</artifactId>
+    <version>1.15.0</version>
   </dependency>
   ...
 </dependencies>
