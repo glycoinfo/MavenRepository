@@ -1,7 +1,5 @@
 # TestMavenRepository
 
-[注意] 個々のブランチをmasterや他のブランチにマージしないでください 
-
 ## Pomの編集
 ```
 <properties>
@@ -39,7 +37,7 @@
         <noJekyll>true</noJekyll>
         <merge>true</merge>
         <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-        <branch>refs/heads/{DEPLOY_BRANCH_NAME}-repo</branch>
+        <branch>refs/heads/master</branch>
         <includes><include>**/*</include></includes>
         <repositoryName>{MAVEN_REPOSITORY_NAME}</repositoryName>
         <repositoryOwner>{ACCOUNT_NAME}</repositoryOwner>
@@ -98,7 +96,7 @@ $ mvn -B -s .m2/settings.xml deploy
     <repository>
       <id>github</id>
       <name>my github repository</name>
-      <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/{BRANCH_NAME}/</url>
+      <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
     </repository>
    ...
   </repositories>
@@ -113,7 +111,7 @@ $ mvn -B -s .m2/settings.xml deploy
   <repository>
     <id>github</id>
     <name>my github repository</name>
-    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/MolecularFramework-repo/</url>
+    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
   </repository>
   ...
 </repositories>
@@ -138,7 +136,7 @@ $ mvn -B -s .m2/settings.xml deploy
   <repository>
     <id>github</id>
     <name>my github repository</name>
-    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/GlycanBuilder2-repo/</url>
+    <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
   </repository>
   ...
 </repositories>
