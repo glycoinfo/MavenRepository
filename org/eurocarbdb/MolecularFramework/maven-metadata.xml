@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.eurocarbdb</groupId>
+  <artifactId>MolecularFramework</artifactId>
+  <versioning>
+    <versions>
+      <version>0.1-b37-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20220112055244</lastUpdated>
+  </versioning>
+</metadata>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.eurocarbdb</groupId>
+  <artifactId>MolecularFramework</artifactId>
+  <version>0.1-b37-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20220112.055244</timestamp>
+      <buildNumber>8</buildNumber>
+    </snapshot>
+    <lastUpdated>20220112055244</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.1-b37-20220112.055243-7</value>
+        <updated>20220112055244</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.1-b37-20220112.055243-7</value>
+        <updated>20220112055244</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>sources</classifier>
+        <extension>jar</extension>
+        <value>0.1-b37-20220112.055243-7</value>
+        <updated>20220112055244</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
