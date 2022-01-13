@@ -39,8 +39,8 @@
         <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
         <branch>refs/heads/master</branch>
         <includes><include>**/*</include></includes>
-        <repositoryName>{MAVEN_REPOSITORY_NAME}</repositoryName>
-        <repositoryOwner>{ACCOUNT_NAME}</repositoryOwner>
+        <repositoryName>MavenRepository</repositoryName>
+        <repositoryOwner>glycoinfo</repositoryOwner>
       </configuration>
       <executions>
         <execution>
