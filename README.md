@@ -1,4 +1,4 @@
-# TestMavenRepository
+# MavenRepository
 
 ## Pomの編集
 ```
@@ -58,12 +58,8 @@
 
 ## 認証用ファイルの作成
 
-以下の構成でファイルを作成する\
-**このフォルダを.gitignoreに入れておくことをお勧めします**
-
-> .m2/settings.xml
-
-* settings.xml
+* Mavenローカルリポジトリ\
+.m2の直下に`settings.xml`を作成して以下の情報を入力する
 ```
 <settings xmlns="http://maven.Apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.Apache.org/SETTINGS/1.0.0
@@ -78,7 +74,16 @@
 </settings>
 ```
 
+MavenのローカルリポジトリでGithubのアカウント情報を管理したくない場合は、プロジェクト直下に`.m2/settings.xml`を作成して上記の認証情報を入力する\
+**.gitignoreに.m2/と記載しておくことを強くお勧めします**
+
 ## Deploy
+* Mavenローカルリポジトリ
+```
+$ mvn deploy
+```
+
+* プロジェクト直下の.m2ディレクトリ
 ```
 $ mvn -B -s .m2/settings.xml deploy
 ```
@@ -96,7 +101,7 @@ $ mvn -B -s .m2/settings.xml deploy
     <repository>
       <id>github</id>
       <name>my github repository</name>
-      <url>https://raw.githubusercontent.com/{USER_NAME}/{REPOSITORY_NAME}/master/</url>
+      <url>https://raw.githubusercontent.com/glycoinfo/MavenRepository/master/</url>
     </repository>
    ...
   </repositories>
