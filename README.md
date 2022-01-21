@@ -18,7 +18,7 @@
 ```
 
 MavenのローカルリポジトリでGithubのアカウント情報を管理したくない場合は、プロジェクト直下に`.m2/settings.xml`を作成して上記の認証情報を入力する\
-この場合、.gitignoreに`.m2`を追加し、プロジェクト直下の.m2ディレクトリをgithubへのプッシュしないようにする
+この場合、.gitignoreに`.m2`を追加し、プロジェクト直下の.m2ディレクトリをgithubへプッシュしないようにする
 
 ## Pomの編集
 
@@ -30,7 +30,7 @@ MavenのローカルリポジトリでGithubのアカウント情報を管理し
 </properties>
 ```
 
-### デプロイ時に対象のリポジトリ指定
+### デプロイ時のリポジトリ指定
 デプロイの実行時にMavenが参照するリポジトリを`<distributionManagement>`に追加する\
 `<id>`は好きなように名前の入力が可能だが、下記の`maven-deploy-plugin`で指定するリポジトリと統一する必要がある\
 `<name>`は開発者が好きな情報を入力することが可能である\
@@ -72,10 +72,10 @@ MavenのローカルリポジトリでGithubのアカウント情報を管理し
 |message|gitにコミットする際のメッセージ|
 |noJekyll|.nojekyllファイル作成の有無|
 |merge|既存の成果物への上書きの有無|
-|outputDirectory|成果物が出力されているディレクトリ|
-|repositoryName|リポジトリ名|
-|repositoryOwner|リポジトリのユーザ名|
-|branch|ブランチ名|
+|outputDirectory|成果物が出力されているディレクトリ（target/mvn-repo）|
+|repositoryName|リポジトリ名（MavenRepository）|
+|repositoryOwner|リポジトリのユーザ名（glycoinfo）|
+|branch|ブランチ名（master）|
 |includes|処理対象とするファイルの指定|
 ```
 <build>
