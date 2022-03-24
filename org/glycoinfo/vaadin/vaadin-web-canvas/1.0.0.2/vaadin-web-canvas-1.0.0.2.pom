@@ -167,7 +167,7 @@
 
         <resources>
             <resource>
-                <directory>src/main/java</directory>
+                <directory>**/</directory>
                 <excludes>
                     <exclude>**/AppShell.*</exclude>
                     <exclude>**/MainView.*</exclude>
