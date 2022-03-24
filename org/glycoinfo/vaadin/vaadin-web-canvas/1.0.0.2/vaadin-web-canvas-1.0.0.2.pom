@@ -170,7 +170,9 @@
                 <directory>src/main/java</directory>
                 <excludes>
                     <exclude>**/AppShell.java</exclude>
+                    <exclude>**/AppShell.class</exclude>
                     <exclude>**/MainView.java</exclude>
+                    <exclude>**/MainView.class</exclude>
                 </excludes>
             </resource>
         </resources>
