@@ -5,7 +5,7 @@
     <artifactId>vaadin-web-canvas</artifactId>
     <version>1.0.0.1</version>
     <name>Vaadin Web Canvas</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -243,29 +243,6 @@
                             <altDeploymentRepository>vaadin.web.canvas.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                         </configuration>
                     </plugin>
-                    <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Maven artifacts for ${project.version}</message>
-                    <noJekyll>true</noJekyll>
-                    <merge>true</merge>
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-                    <branch>refs/heads/master</branch>
-                    <includes><include>**/*</include></includes>
-                    <repositoryName>MavenRepository</repositoryName>
-                    <repositoryOwner>glycoinfo</repositoryOwner>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
-            </plugin>
                 </plugins>
             </build>
         </profile>
