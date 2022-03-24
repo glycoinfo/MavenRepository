@@ -173,6 +173,13 @@
                     <exclude>**/MainView.*</exclude>
                 </excludes>
             </resource>
+            <resource>
+                <directory>target/classes</directory>
+                <excludes>
+                    <exclude>**/AppShell.*</exclude>
+                    <exclude>**/MainView.*</exclude>
+                </excludes>
+            </resource>
         </resources>
     </build>
 
