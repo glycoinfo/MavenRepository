@@ -176,8 +176,8 @@
             <resource>
                 <directory>target/classes</directory>
                 <excludes>
-                    <exclude>**/AppShell.*</exclude>
-                    <exclude>**/MainView.*</exclude>
+                    <exclude>**/AppShell.class</exclude>
+                    <exclude>**/MainView.class</exclude>
                 </excludes>
             </resource>
         </resources>
