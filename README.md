@@ -1,8 +1,8 @@
 # MavenRepository
 
-## 認証用ファイルの作成
+## Creating Authentication File
 
-.m2の直下に`settings.xml`を作成して以下の情報を入力する
+Create `settings.xml` under the .m2 directory and enter the following information:
 ```
 <settings xmlns="http://maven.Apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.Apache.org/SETTINGS/1.0.0
@@ -17,24 +17,27 @@
 </settings>
 ```
 
-MavenのローカルリポジトリでGithubのアカウント情報を管理したくない場合は、プロジェクト直下に`.m2/settings.xml`を作成して上記の認証情報を入力する\
-この場合、.gitignoreに`.m2`を追加し、プロジェクト直下の.m2ディレクトリをgithubへプッシュしないようにする
+If you don't want to manage the Github account information in the local Maven repository, create `.m2/settings.xml` under the project root and enter the authentication information mentioned above.
+In this case, add `.m2` to the .gitignore file to prevent pushing the .m2 directory under the project root to GitHub.
 
-## Pomの編集
 
-### githubアカウントの参照
-上記のgithubアカウントを使用するために`<properties>`を追加する
+## Editing Pom
+
+### Referencing the Github Account
+Add `<properties>` to use the above github account:
 ```
 <properties>
   <github.global.server>github</github.global.server>
 </properties>
 ```
 
-### デプロイ時のリポジトリ指定
-デプロイの実行時にMavenが参照するリポジトリを`<distributionManagement>`に追加する\
-`<id>`は好きなように名前の入力が可能だが、下記の`maven-deploy-plugin`で指定するリポジトリと統一する必要がある\
-`<name>`は開発者が好きな情報を入力することが可能である\
-`${project.build.directory}`はtargetフォルダを示し、その中の`mvn-repo`というフォルダをgithubリポジトリとして扱うことを示す
+### Repository Specification for Deployment
+Repository Specification for Deployment
+Add the repository that Maven should reference during deployment to `<distributionManagement>`.
+You can enter any name for `<id>`, but it needs to match the repository specified in the `maven-deploy-plugin` below.
+You can enter any information for `<name>` as desired.
+`${project.build.directory}` represents the target folder, and it indicates the `mvn-repo` folder within it as the Github repository.
+
 ```
 <distributionManagement>
   <repository>
@@ -45,10 +48,12 @@ MavenのローカルリポジトリでGithubのアカウント情報を管理し
 </distributionManagement>
 ```
 
-### デプロイ用の成果物指定
-以下のプラグインを追加して、`<distributionManagement>`で指定したリポジトリへデプロイする成果物を生成する\
-`<altDeploymentRepository>`は`id::layout::url`で構成され、idは`distributionManagement`で宣言したid、layoutはリポジトリのレイアウト、URLはリポジトリのアドレスを示す\
-デプロイコマンドを実行すると、`target/mvn-repo`のファイル階層で成果物が生成される
+### Specify deliverables for deployment
+
+Add the following plugin to generate artifacts to deploy to the repository specified in `<distributionManagement>`.
+`<altDeploymentRepository>` consists of `id::layout::url`, where id is the id declared in `distributionManagement`, layout is the layout of the repository and url is the repository address.
+When the deploy command is executed, the artifacts are generated in the file hierarchy of `target/mvn-repo`.
+
 ```
 <build>
   <plugins>
@@ -65,18 +70,20 @@ MavenのローカルリポジトリでGithubのアカウント情報を管理し
 ```
 
 ### 
-`site-maven-plugin`を追加して、デプロイするリポジトリの詳細情報を指定する\
-個々のタグの詳細を下表に示す
+Add the `site-maven-plugin` to specify detailed information about the repository to be deployed.
+The details of each tag are shown in the table below:
+
 |Tag|Description|
 |---|---|
-|message|gitにコミットする際のメッセージ|
-|noJekyll|.nojekyllファイル作成の有無|
-|merge|既存の成果物への上書きの有無|
-|outputDirectory|成果物が出力されているディレクトリ（target/mvn-repo）|
-|repositoryName|リポジトリ名（MavenRepository）|
-|repositoryOwner|リポジトリのユーザ名（glycoinfo）|
-|branch|ブランチ名（master）|
-|includes|処理対象とするファイルの指定|
+|message|Message for committing to git|
+|noJekyll|Whether to create a .nojekyll file|
+|merge|Whether to overwrite existing artifacts|
+|outputDirectory|The directory where artifacts are output （target/mvn-repo）|
+|repositoryName|Repository name （MavenRepository）|
+|repositoryOwner|Username of the repository（glycoinfo）|
+|branch|Branch name（master）|
+|includes|Specification of files to process|
+
 ```
 <build>
   <plugins>
@@ -110,14 +117,15 @@ MavenのローカルリポジトリでGithubのアカウント情報を管理し
 ```
 
 ## Deploy
-* Mavenローカルリポジトリ
+* Maven Local Repository
+
 ```
-$ mvn deploy
+mvn deploy
 ```
 
-* プロジェクト直下の.m2ディレクトリ
+* .m2 Directory in the project root
 ```
-$ mvn -B -s .m2/settings.xml deploy
+mvn -B -s .m2/settings.xml deploy
 ```
 
 |Option|Description|
@@ -161,7 +169,7 @@ $ mvn -B -s .m2/settings.xml deploy
   <dependency>
   　　　　<groupId>org.eurocarbdb.glycanbuilder</groupId>
     <artifactId>glycanbuilder2</artifactId>
-    <version>1.15.0</version>
+    <version>1.20.1</version>
   </dependency>
   ...
 </dependencies>
