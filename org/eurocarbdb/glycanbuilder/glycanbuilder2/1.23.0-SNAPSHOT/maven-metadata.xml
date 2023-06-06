@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.eurocarbdb.glycanbuilder</groupId>
+  <artifactId>glycanbuilder2</artifactId>
+  <versioning>
+    <lastUpdated>20230606024900</lastUpdated>
+    <snapshot>
+      <timestamp>20230606.024900</timestamp>
+      <buildNumber>10</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.23.0-20230606.024900-9</value>
+        <updated>20230606024900</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.23.0-20230606.024900-9</value>
+        <updated>20230606024900</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>1.23.0-SNAPSHOT</version>
+</metadata>
