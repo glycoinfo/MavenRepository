@@ -162,7 +162,7 @@ mvn -B -s .m2/settings.xml deploy
 </dependencies>
 ```
 
-### GlycanBuilder2 (1.15.0)
+### GlycanBuilder2 (1.20.1)
 ```
 <dependencies>
   ...
