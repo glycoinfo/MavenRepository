@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>ResourceDB</name>
+	<description>EuroCarbDB, a framework for carbohydrate bioinformatics.</description>
+
+	<organization>
+		<name>EuroCarbDB</name>
+		<url>https://github.com/glycoinfo/eurocarb</url>
+	</organization>
+
+	<groupId>org.eurocarbdb</groupId>
+	<artifactId>resourcesdb</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<github.global.server>github</github.global.server>
+	</properties>
+
+	<ciManagement>
+		<notifiers>
+			<notifier>
+				<address>glyconavi@noguchi.or.jp</address>
+				<type>mail</type>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+
+	<scm>
+		<connection>scm:git:https://github.com/glycoinfo/ResourceDB.git</connection>
+		<url>https://github.com/glycoinfo/ResourceDB.git</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>GNU Public License</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>The GNU General Public License is a free, copyleft license for software and other kinds of works.</comments>
+		</license>
+	</licenses>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>ResoucesDB github repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
+
+	<developers>
+		<developer>
+			<id>thomas</id>
+			<name>Thomas</name>
+			<email>Thomas...@vetmed.uni-giessen.de</email>
+			<url>http://www.glycosciences.de/people/index.php?name=thomas</url>
+			<organization>Glycosciences.de</organization>
+			<organizationUrl>http://www.glycosciences.de</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- explicitly define maven-deploy-plugin after other to force exec 
+					order -->
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version>
+				<configuration>
+					<message>Maven artifacts for ${project.name} ${project.version}</message>
+					<noJekyll>true</noJekyll>
+					<merge>true</merge>
+					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+					<branch>refs/heads/master</branch>
+					<includes><include>**/*</include></includes>
+					<repositoryName>MavenRepository</repositoryName>
+					<repositoryOwner>glycoinfo</repositoryOwner>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+			<artifactId>org.apache.batik.svggen</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+			<artifactId>org.apache.batik.transcoder</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-swing</artifactId>
+			<version>1.6-1</version>
+		</dependency>
+	</dependencies>
+</project>
