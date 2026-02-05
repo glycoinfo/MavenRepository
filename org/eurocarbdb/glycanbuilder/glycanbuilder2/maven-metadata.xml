@@ -3,10 +3,11 @@
   <groupId>org.eurocarbdb.glycanbuilder</groupId>
   <artifactId>glycanbuilder2</artifactId>
   <versioning>
-    <release>1.25.5</release>
+    <release>1.25.6</release>
     <versions>
       <version>1.25.5</version>
+      <version>1.25.6</version>
     </versions>
-    <lastUpdated>20251125070101</lastUpdated>
+    <lastUpdated>20260205024223</lastUpdated>
   </versioning>
 </metadata>
