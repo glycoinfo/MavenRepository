@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.glycoinfo.vaadin</groupId>
+    <artifactId>vaadin-web-canvas</artifactId>
+    <version>1.0.0.12</version>
+    <name>Vaadin Web Canvas</name>
+    <packaging>jar</packaging>
+
+    <!--
+        The add-on is a library first. Up to 1.0.0.9 this pom built a Vaadin 21 demo war by
+        default and the library jar came out of a profile; the jar is the whole build now, so
+        `mvn package` produces the artifact consumers depend on.
+
+        1.0.0.10 and 1.0.0.11 were built outside this repository while glycanbuilder2web moved to
+        Vaadin 25, from a copy of these sources. This commit brings that copy home. The only
+        change to the Java is that org.vaadin.pekkam's Canvas and CanvasRenderingContext2D are
+        now part of the add-on (src/main/java/org/glycoinfo/vaadin/Canvas.java and
+        CanvasRenderingContext2D.java): canvas-java 1.0.1 is a Vaadin 14-era artifact that was
+        never rebuilt for Vaadin 25, so three import lines went away and two files arrived.
+
+        The demo has moved to demo/, which is its own standalone project: it depends on the
+        published add-on the way a consumer does, so this pom stays a library pom and nothing the
+        demo needs can leak into what is published.
+    -->
+
+    <properties>
+        <!-- 1.8 is what the published 1.0.0.10/1.0.0.11 class files were compiled to; kept so a
+             rebuild of this version produces the same bytecode consumers already resolve. -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>25.2.5</vaadin.version>
+    </properties>
+
+    <!--
+        `mvn deploy` stages into target/mvn-repo and publishes nothing; publishing is a deliberate
+        second step, described under "How to publish" in the README. Up to 1.0.0.9 the deploy phase
+        also ran com.github.github:site-maven-plugin, which pushed target/mvn-repo straight onto
+        glycoinfo/MavenRepository's master. That is gone, for a measured reason: a deploy into an
+        empty target/mvn-repo writes a maven-metadata.xml listing only the version just built, and
+        pushing that replaces the repository's own metadata - which lists every release - with it.
+        Deploying into a checkout of the repository instead lets Maven merge the metadata, keeping
+        every version and moving <release> forward, which is what the README's recipe does.
+    -->
+    <distributionManagement>
+        <repository>
+            <id>vaadin.web.canvas.repo</id>
+            <name>Local staging directory; see "How to publish" in the README</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
+
+        <!-- Main Maven repository -->
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Repository used by many Vaadin add-ons: https://vaadin.com/directory -->
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <!-- Replace artifactId with vaadin-core to use only free components -->
+            <artifactId>vaadin</artifactId>
+            <exclusions>
+                <!-- Fusion is only supported in Spring Boot currently, exclude obsolete dependencies -->
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>fusion-endpoint</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Bundle the .java sources into the jar as well, matching the original artifact layout. -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Deliberately without an altDeploymentRepository of its own: a value configured
+                     here would win over -DaltDeploymentRepository on the command line, and silently
+                     - the build says BUILD SUCCESS and stages into target/mvn-repo while you think
+                     you are deploying into a checkout of the repository. distributionManagement
+                     above is the staging default; the command line is how you override it. -->
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
