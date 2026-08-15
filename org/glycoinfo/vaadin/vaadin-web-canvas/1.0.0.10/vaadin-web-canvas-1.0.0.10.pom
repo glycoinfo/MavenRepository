@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.glycoinfo.vaadin</groupId>
+    <artifactId>vaadin-web-canvas</artifactId>
+    <version>1.0.0.10</version>
+    <name>Vaadin Web Canvas</name>
+    <packaging>jar</packaging>
+
+    <!--
+      1.0.0.10: absorbed the org.vaadin.pekkam:canvas-java base classes (Canvas,
+      CanvasRenderingContext2D) into this add-on and removed the external dependency on it.
+      The pekkam add-on was last released in 2019 for an old Vaadin generation and referenced
+      Page.executeJavaScript / Page$ExecutionCanceler, which were removed in later Vaadin
+      versions. The absorbed CanvasRenderingContext2D now runs raw scripts via
+      Element.executeJs, so this artifact has no version-fragile third-party dependency and
+      builds cleanly on both Vaadin 21 and Vaadin 24.
+    -->
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>21.0.7</vaadin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>fusion-endpoint</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
